@@ -189,7 +189,7 @@ function resize() {
 
 function renderTowns() {
 	const townData = [],
-		server = window.sessionStorage.getItem('server') || 'nova-2022';
+		server = window.sessionStorage.getItem('server') || 'nova';
 
 	let mapURL = `.`,
 		markers = `/images/`,
