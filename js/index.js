@@ -45,7 +45,7 @@ const radius = 100,
 	],
 	playerGeometry = new THREE.SphereGeometry(0.2),
 	playerMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 }),
-	townLabelsObj =  [], playersObj = [], playerLabelsObj = [], townsObj = [],
+	townLabelsObj =  [], townsObj = [],
 	axis = new THREE.Vector3( 1, 0, 0 );
 	
 let scene, renderer, camera, controls, skybox;
@@ -67,7 +67,6 @@ function cartesianToSpherical(x, z, r) {
 // Buttons/togglers listeners and methods.
 document.getElementById('nova').addEventListener('click', function() { toggleMap('nova') });
 document.getElementById('nova-2022').addEventListener('click', function() { toggleMap('nova-2022') });
-//document.getElementById('players').addEventListener('change', function() { toggleInput('players') });
 document.getElementById('towns').addEventListener('change', function() { toggleInput('towns') });
 document.getElementById('labels').addEventListener('change', function() { toggleInput('labels') });
 document.getElementById('flysurf').addEventListener('change', function() { toggleInput('surfaceflight') });
@@ -82,10 +81,6 @@ function toggleMap(server) {
 
 function toggleInput(param, value = null) {
 	switch (param) {
-		/*case 'players':
-			playersObj.forEach(player => { player.visible = !player.visible; });
-			playerLabelsObj.forEach(label => { label.visible = !label.visible; });
-			break;*/
 		case 'towns':
 			townsObj.forEach(town => { town.visible = !town.visible; });
 			break;
@@ -112,7 +107,7 @@ function initialize() {
 	camera.position.z = 800;
 	
 	// Render planet.
-	const server = window.sessionStorage.getItem('server') || 'aurora',
+	const server = window.sessionStorage.getItem('server') || 'nova',
 		earthGeometry = new THREE.SphereGeometry(radius, 50, 50),
 		earthMaterial = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(`images/${server}.png`) }),
 		earth = new THREE.Mesh(earthGeometry, earthMaterial);
@@ -172,10 +167,10 @@ function update() {
 		if (zoom >= stage.minDistance && zoom <= stage.maxDistance) controls.rotateSpeed = stage.speed;
 	});
 	if (zoom > 150) {
-		//playerLabelsObj.forEach(player => { player.visible = false; });
+		
 		townLabelsObj.forEach(label => { label.visible = false; });
 	} else {
-		//playerLabelsObj.forEach(player => { player.visible = document.getElementById('players').checked; });
+		
 		townLabelsObj.forEach(player => { player.visible = document.getElementById('labels').checked; });
 	}
 
